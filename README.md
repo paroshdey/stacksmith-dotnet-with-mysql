@@ -1,5 +1,7 @@
 # .NET Core Application with DB (MySQL): Simple asp net core todo app
 
+[![View in Stacksmith](https://img.shields.io/badge/view_in-stacksmith-00437B.svg)](https://stacksmith.bitnami.com/p/bitnami-public/apps/751f8df0-b832-0136-5731-32c52fe95d91)
+
 This is an example to show how to deploy an application using the `.NET Core Application with DB (MySQL)` stack template in [Bitnami Stacksmith](stacksmith.bitnami.com).
 
 ## Package and deploy with Stacksmith
