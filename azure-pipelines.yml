@@ -52,7 +52,7 @@ stages:
     - task: oc-cmd@2
       inputs:
         connectionType: 'OpenShift Connection Service'
-        openshiftService: 'openshift'
+        openshiftService: 'My Openshift'
         cmd: 'new-app -f $(Build.SourcesDirectory)/$(MYSQL_TEMPLATE) --param=DATABASE_SERVICE_NAME=$(MYSQLSERVICE) --param=MYSQL_USER=$(MYSQLUSER) --param=MYSQL_PASSWORD=$(MYSQLPASSWORD) --param=MYSQL_DATABASE=$(MYSQLDATABASE) -n $(namespace)'
         uselocalOc: true
         ignoreFlag: true
