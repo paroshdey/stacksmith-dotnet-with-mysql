@@ -11,6 +11,10 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  tag: '$(Build.BuildId)'
+  namespace: 'default'
+  sourceimage: 'dotnet:2.1'
+  applicationname: validateapi
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
