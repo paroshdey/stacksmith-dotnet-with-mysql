@@ -16,6 +16,8 @@ variables:
   value: '$(Build.BuildId)'
 - name: namespace
   value: 'akhinat1-in'
+- name: template
+  value: 'app_template.yaml'
 - name: sourceimage
   value: 'dotnet:2.1'
 - name: applicationname
@@ -47,4 +49,16 @@ stages:
         uselocalOc: true
         ignoreFlag: true
       displayName: Starting Build
-
+    - task: CopyFiles@2
+      inputs:
+        Contents: '$(template)'
+        TargetFolder: '$(build.artifactstagingdirectory)'
+      displayName: Copying file  
+                 
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+      displayName: Pushing Build Artifacts
+    
