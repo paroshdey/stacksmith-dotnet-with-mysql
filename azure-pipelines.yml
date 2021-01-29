@@ -33,7 +33,7 @@ stages:
       inputs:
         connectionType: 'OpenShift Connection Service'
         openshiftService: 'My Openshift'
-        cmd: 'new-build --name=$(applicationname) --image-stream=$(sourceimage) --strategy=source --binary  -n $(namespace)'
+        cmd: 'oc new-build --name=$(applicationname) --image-stream=$(sourceimage) --strategy=source --binary  -n $(namespace)'
         uselocalOc: true
         ignoreFlag: true
       displayName: Creating New Build
