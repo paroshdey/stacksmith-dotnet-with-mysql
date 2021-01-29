@@ -1,0 +1,49 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  tag: '$(Build.BuildId)'
+  namespace: default
+  sourceimage: 'dotnet:2.1'
+  applicationname: validateapi
+  buildConfiguration: 'Release'
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:  
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: oc-cmd@2
+      inputs:
+        connectionType: 'OpenShift Connection Service'
+        openshiftService: 'My Openshift'
+        cmd: 'new-build --name=$(applicationname) --image-stream=$(sourceimage) --strategy=source --binary  -n $(namespace)'
+        uselocalOc: true
+        ignoreFlag: true
+      displayName: Creating New Build
+    - task: oc-cmd@2
+      inputs:
+        connectionType: 'OpenShift Connection Service'
+        openshiftService: 'openshift'
+        cmd: 'start-build $(applicationname) --from-dir=/home/vsts/work/1/s/ --follow -n $(namespace)'
+        uselocalOc: true
+        ignoreFlag: true
+      displayName: Starting Build  
+   
+    - task: CopyFiles@2
+      inputs:
+        Contents: '$(template)'
+        TargetFolder: '$(build.artifactstagingdirectory)'
+      displayName: Copying file  
+
