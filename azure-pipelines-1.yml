@@ -11,7 +11,7 @@ pool:
 
 variables:
   tag: '$(Build.BuildId)'
-  namespace: default
+  namespace: akhinat1
   sourceimage: 'dotnet:2.1'
   applicationname: validateapi
   buildConfiguration: 'Release'
@@ -40,10 +40,4 @@ stages:
         uselocalOc: true
         ignoreFlag: true
       displayName: Starting Build  
-   
-    - task: CopyFiles@2
-      inputs:
-        Contents: '$(template)'
-        TargetFolder: '$(build.artifactstagingdirectory)'
-      displayName: Copying file  
 
