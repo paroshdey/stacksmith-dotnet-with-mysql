@@ -13,11 +13,11 @@ variables:
 - name: tag
   value: '$(Build.BuildId)'
 - name: namespace
-  value: akhinat1
+  value: 'akhinat1-in'
 - name: sourceimage
   value: 'dotnet:2.1'
 - name: applicationname
-  value: validateapi
+  value: 'stacksmith'
 - name: buildConfiguration
   value: 'Release'
 stages:
