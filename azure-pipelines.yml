@@ -49,6 +49,22 @@ stages:
         uselocalOc: true
         ignoreFlag: true
       displayName: Starting Build
+    - task: oc-cmd@2
+      inputs:
+        connectionType: 'OpenShift Connection Service'
+        openshiftService: 'openshift'
+        cmd: 'new-app -f $(Build.SourcesDirectory)/$(MYSQL_TEMPLATE) --param=DATABASE_SERVICE_NAME=$(MYSQLSERVICE) --param=MYSQL_USER=$(MYSQLUSER) --param=MYSQL_PASSWORD=$(MYSQLPASSWORD) --param=MYSQL_DATABASE=$(MYSQLDATABASE) -n $(namespace)'
+        uselocalOc: true
+        ignoreFlag: true
+      displayName: Deploying Database    
+    - task: oc-cmd@2
+      inputs:
+        connectionType: 'OpenShift Connection Service'
+        openshiftService: 'My Openshift'
+        cmd: 'new-app -f $(Build.SourcesDirectory)/$(template) -p APP_NAME=$(applicationname)  --dry-run -o yaml | oc apply -f - -n $(namespace)'
+        ignoreFlag: true
+        uselocalOc: true
+      displayName: Deploying Application 
     - task: CopyFiles@2
       inputs:
         Contents: '$(template)'
