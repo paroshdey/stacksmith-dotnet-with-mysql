@@ -53,7 +53,7 @@ stages:
       inputs:
         connectionType: 'OpenShift Connection Service'
         openshiftService: 'My Openshift'
-        cmd: 'new-app -f $(Build.SourcesDirectory)/$(MYSQL_TEMPLATE) --param=DATABASE_SERVICE_NAME=$(MYSQLSERVICE) --param=MYSQL_USER=$(MYSQLUSER) --param=MYSQL_PASSWORD=$(MYSQLPASSWORD) --param=MYSQL_DATABASE=$(MYSQLDATABASE) -n $(namespace)'
+        cmd: 'new-app --template=mysql-ephemeral --param=MYSQL_USER=sample --param=MYSQL_PASSWORD=sample --param=MYSQL_DATABASE=todolist --param=DATABASE_SERVICE_NAME=mysql --name mysql -n ${env.projectName}'
         uselocalOc: true
         ignoreFlag: true
       displayName: Deploying Database    
