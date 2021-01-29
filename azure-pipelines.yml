@@ -5,6 +5,8 @@
 
 trigger:
 - master
+resources:
+- repo: self
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -27,7 +29,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: $(vmImageName)
+      vmImageName: $(vmImageName)
     steps:
     - task: oc-cmd@2
       inputs:
